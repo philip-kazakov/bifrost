@@ -1,48 +1,48 @@
 {
   "name": "bifrost",
-  "version": "0.0.1",
-  "description": "A cache gateway for posting in the past",
-  "main": "app.js",
-  "scripts": {
-    "start": "node $NODE_DEBUG_OPTION app.js",
-    "test-server": "node $NODE_DEBUG_OPTION ./test/server.js",
-    "tests-requests": "node ./test/requests.js",
-    "tests-proxy": "./node_modules/mocha/bin/mocha ./test/test.js",
-    "iso": "standard"
-  },
-  "repository": {
-    "type": "git",
-    "url": "github.com/soixantecircuits/bifrost"
-  },
+  "description": "",
+  "version": "0.0.0",
+  "homepage": "",
+  "main": "src",
   "keywords": [
-    "cache",
-    "gateway",
-    "proxy",
-    "queue"
+    "feathers"
   ],
-  "author": "Soixante circuits",
-  "license": "MIT",
+  "author": {
+    "name": "NikitaNO",
+    "email": "nikita.nagatkin@gmail.com"
+  },
+  "contributors": [],
+  "bugs": {},
+  "directories": {
+    "lib": "src",
+    "test": "test/"
+  },
+  "engines": {
+    "node": "^8.0.0",
+    "yarn": ">= 0.18.0"
+  },
+  "scripts": {
+    "test": "yarn run eslint && yarn run mocha",
+    "eslint": "eslint src/. test/. --config .eslintrc.json",
+    "start": "node src/",
+    "mocha": "mocha test/ --recursive --exit"
+  },
   "dependencies": {
-    "async": "^2.0.0",
-    "body-parser": "~1.14.1",
-    "ejs": "^2.3.4",
-    "express": "~4.13.3",
-    "fs-extra": "~0.24.0",
-    "graceful-fs": "~4.1.2",
-    "ip": "~1.0.1",
-    "list.js": "^1.2.0",
-    "lodash": "^3.10.1",
-    "mdns": "^2.3.3",
-    "moment": "^2.14.1",
-    "multer": "^1.1.0",
-    "nanotimer": "0.3.13",
-    "nedb": "^1.8.0",
-    "request": "~2.65.0"
+    "@feathersjs/configuration": "^1.0.2",
+    "@feathersjs/errors": "^3.2.1",
+    "@feathersjs/express": "^1.1.2",
+    "@feathersjs/feathers": "^3.0.5",
+    "@feathersjs/socketio": "^3.0.2",
+    "compression": "^1.7.1",
+    "cors": "^2.8.4",
+    "helmet": "^3.9.0",
+    "serve-favicon": "^2.4.5",
+    "winston": "^2.4.0"
   },
   "devDependencies": {
-    "minigun": "^1.2.14",
-    "newman": "2.1.2",
-    "standard": "^3.0.0",
-    "supertest": "^2.0.0"
+    "eslint": "^4.15.0",
+    "mocha": "^4.1.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
   }
 }

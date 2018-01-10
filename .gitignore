@@ -37,6 +37,10 @@ ehthumbs.db
 Icon?
 Thumbs.db
 
+# Editor files #
+######################
+.idea
+*.iml
 
 # Node modules #
 ######################
