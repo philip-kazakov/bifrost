@@ -1,5 +1,5 @@
-const Main = require('./Main')
+const Main = require('./main/main.service')
 
 module.exports = app => {
-  app.use('/main', new Main())
+  app.configure(Main)
 }

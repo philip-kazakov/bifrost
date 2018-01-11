@@ -7,6 +7,6 @@
     "devMode": true
   },
   "folder": {
-    "uploads": "./uploads"
+    "uploads": "./../uploads"
   }
 }

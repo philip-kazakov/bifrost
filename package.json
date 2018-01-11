@@ -37,6 +37,7 @@
     "ejs": "^2.5.7",
     "feathers-sequelize": "^3.0.0",
     "helmet": "^3.9.0",
+    "multer": "^1.3.0",
     "sequelize": "^4.31.0",
     "sqlite3": "^3.1.13",
     "standard-settings": "^1.1.10",
