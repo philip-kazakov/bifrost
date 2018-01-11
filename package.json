@@ -24,11 +24,10 @@
   "scripts": {
     "test": "yarn run eslint && yarn run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
-    "start": "node src/",
+    "start": "node src/index.js --settings settings/settings.default.json",
     "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
-    "@feathersjs/configuration": "^1.0.2",
     "@feathersjs/errors": "^3.2.1",
     "@feathersjs/express": "^1.1.2",
     "@feathersjs/feathers": "^3.0.5",
@@ -40,6 +39,7 @@
     "helmet": "^3.9.0",
     "sequelize": "^4.31.0",
     "sqlite3": "^3.1.13",
+    "standard-settings": "^1.1.10",
     "winston": "^2.4.0"
   },
   "devDependencies": {

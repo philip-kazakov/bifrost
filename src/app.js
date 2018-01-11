@@ -5,7 +5,6 @@ const helmet = require('helmet')
 const logger = require('winston')
 
 const feathers = require('@feathersjs/feathers')
-const configuration = require('@feathersjs/configuration')
 const express = require('@feathersjs/express')
 const socketio = require('@feathersjs/socketio')
 
@@ -25,9 +24,6 @@ const sequelize = new Sequelize('sequelize', '', '', {
 
 const app = express(feathers())
 
-// Load app configuration
-app.configure(configuration())
-
 app.set('view engine', 'ejs')
 
 app.use(cors())
@@ -35,7 +31,6 @@ app.use(helmet())
 app.use(compress())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
 app.get('/', (req, res) => {
