@@ -2,7 +2,7 @@ const logger = require('./hooks/logger')
 
 module.exports = {
   before: {
-    all: [ logger() ],
+    all: [logger()],
     find: [],
     get: [],
     create: [],
