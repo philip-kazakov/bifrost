@@ -1,6 +1,9 @@
-const path = require('path')
 const standardSettings = require('standard-settings')
+const winston = require('winston')
 const multer = require('multer')
+const path = require('path')
+
+const proxy = require('./../../utils/proxy')
 
 const settings = standardSettings.getSettings()
 const upload = multer({
@@ -10,7 +13,13 @@ const upload = multer({
 module.exports = app => {
   class MainService {
     async create (data) {
-      console.dir(data)
+      winston.info('main.service.js | create:', data)
+
+      try {
+        await proxy.post(data)
+      } catch (err) {
+        console.error(err)
+      }
 
       return 'OK'
     }
