@@ -13,15 +13,6 @@ const services = require('./services')
 const appHooks = require('./app.hooks')
 const channels = require('./channels')
 
-const Sequelize = require('sequelize')
-const service = require('feathers-sequelize')
-
-const sequelize = new Sequelize('sequelize', '', '', {
-  dialect: 'sqlite',
-  storage: path.join(__dirname, 'db.sqlite'),
-  logging: false
-})
-
 const app = express(feathers())
 
 app.set('view engine', 'ejs')

@@ -9,7 +9,7 @@ const upload = multer({
 
 module.exports = app => {
   class MainService {
-    async create(data) {
+    async create (data) {
       console.dir(data)
 
       return 'OK'
