@@ -8,21 +8,17 @@ const fs = require('fs')
 const settings = standardSettings.getSettings()
 
 class Proxy {
-  async post (body, fromQueue) {
+  async post (body, fromQueue = false) {
     winston.info(`proxy.js | post from proxy ${fromQueue ? ' -- queue' : ''}`)
-
-    const url = body.url || settings.targetUrl
 
     body.timeStamp = body.timeStamp || new Date().getTime()
 
     if (settings.flag.devMode) {
       body = {
-        url,
+        url: body.url,
         type: 'POST',
         reason: 'dev'
       }
-    } else {
-      body.url = url
     }
 
     try {
@@ -33,7 +29,7 @@ class Proxy {
   }
 
   launchRequest (body, fromQueue) {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       winston.info('proxy.js | launchRequest', body.url)
 
       body.formData = body.formData || querystring.parse(body.data)
@@ -44,28 +40,36 @@ class Proxy {
 
       const options = {}
 
-      if (!Array.isArray(body.files) || !body.files.length) {
+      if (!Array.isArray(body.files) ||
+        (Array.isArray(body.files) && !body.files.length)) {
         options.form = body.formData
       }
 
-      const req = request.post(body.url, options, (error, res, body) => {
+      const req = request.post(body.url, options, (error, res, resBody) => {
         if (!error && res && res.statusCode === 200) {
           if (fromQueue) {
             winston.info('proxy.js | launchRequest: success (from queue)')
 
-            // Delete from queue
-            resolve()
+            resolve({
+              deleteFromQueue: true,
+              timeStamp: body.timeStamp
+            })
           } else {
             winston.info('proxy.js | launchRequest: success')
 
-            // Post success
-            resolve()
+            resolve({
+              body: resBody
+            })
           }
         } else {
           winston.info('proxy.js | launchRequest: fail')
 
-          // Post fail
-          reject()
+          resolve({
+            res,
+            body,
+            fromQueue,
+            failed: true
+          })
         }
       })
 
