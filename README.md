@@ -12,14 +12,11 @@ It will forward the response as it is.
 `npm install`
 
 ### Config
-Create a app/config/config.json file based on app/config/config.example.json :
-`cp app/config/config.example.json app/config/config.json`
-
 `npm start`
 
 You should see in the log a line with the port and adress where bifrost is running.
 
-`bifrost 0.0.1 is running on http://192.168.1.10:9090`
+`Bifrost started on http://127.0.0.1:3000`
 
 Now you can post directly their and do not worry about the connectivity.
 
@@ -27,11 +24,6 @@ Now you can post directly their and do not worry about the connectivity.
 
 You can check the future wiki.
 
-# Test
-
-`npm test` uses newman to post 2000 requests
-
 # Dev mode
 
-in /app/config/config.json, set `dev > mode` to `true` to perform fake requests
-
+in /settings/settings.json, set `flag > devMode` to `true` to perform fake requests

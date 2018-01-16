@@ -13,5 +13,5 @@ module.exports = app.listen({
   host: settings.server.host,
   port: settings.server.port
 }, () => {
-  logger.info(`Feathers application started on http://${settings.server.host}:${settings.server.port}`)
+  logger.info(`Bifrost started on http://${settings.server.host}:${settings.server.port}`)
 })
