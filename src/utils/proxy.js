@@ -9,7 +9,7 @@ const settings = standardSettings.getSettings()
 
 class Proxy {
   async post (body, fromQueue) {
-    console.log(`proxy.js | post from proxy ${fromQueue ? ' -- queue' : ''}`)
+    winston.info(`proxy.js | post from proxy ${fromQueue ? ' -- queue' : ''}`)
 
     const url = body.url || settings.targetUrl
 

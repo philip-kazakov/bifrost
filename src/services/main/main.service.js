@@ -18,7 +18,7 @@ module.exports = app => {
       try {
         await proxy.post(data)
       } catch (err) {
-        console.error(err)
+        winston.error(err)
       }
 
       return 'OK'
