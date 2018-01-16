@@ -5,9 +5,11 @@
   },
   "flag": {
     "devMode": true,
-    "dropTables": false
+    "dropTables": false,
+    "autostart": true
   },
   "folder": {
     "uploads": "./../../../uploads"
-  }
+  },
+  "timeout": "30s"
 }
