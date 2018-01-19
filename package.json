@@ -22,10 +22,7 @@
     "yarn": ">= 0.18.0"
   },
   "scripts": {
-    "test": "yarn run eslint && yarn run mocha",
-    "eslint": "eslint src/. test/. --config .eslintrc.json",
-    "start": "node src/",
-    "mocha": "mocha test/ --recursive --exit"
+    "start": "node src/"
   },
   "dependencies": {
     "@feathersjs/configuration": "^1.0.2",
@@ -35,13 +32,14 @@
     "@feathersjs/socketio": "^3.0.2",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
+    "feathers-sequelize": "^3.0.0",
     "helmet": "^3.9.0",
+    "sequelize": "^4.31.2",
     "serve-favicon": "^2.4.5",
+    "sqlite3": "^3.1.13",
     "winston": "^2.4.0"
   },
   "devDependencies": {
-    "eslint": "^4.15.0",
-    "mocha": "^4.1.0",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"
   }

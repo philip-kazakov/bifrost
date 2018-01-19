@@ -1,8 +1,6 @@
-const logger = require('./hooks/logger')
-
 module.exports = {
   before: {
-    all: [logger()],
+    all: [],
     find: [],
     get: [],
     create: [],
@@ -11,7 +9,7 @@ module.exports = {
     remove: []
   },
   after: {
-    all: [logger()],
+    all: [],
     find: [],
     get: [],
     create: [],
@@ -20,7 +18,7 @@ module.exports = {
     remove: []
   },
   error: {
-    all: [logger()],
+    all: [],
     find: [],
     get: [],
     create: [],
