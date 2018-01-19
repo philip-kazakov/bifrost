@@ -54,3 +54,4 @@ npm-debug.log
 app/queue/
 app/config/config.json
 config.json
+settings.json
