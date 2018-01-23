@@ -4,7 +4,7 @@ module.exports = function () {
   return function copyOrigin (req, res, next) {
     winston.info('copyOrigin middleware is running')
 
-    req.origin = req.headers.origin
+    req.feathers.origin = req.headers.origin
 
     next()
   }
