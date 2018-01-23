@@ -1,9 +1,11 @@
+const setTimestamp = require('../../hooks/set-timestamp')
+
 module.exports = {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [setTimestamp()],
     update: [],
     patch: [],
     remove: []
