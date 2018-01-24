@@ -1,8 +1,8 @@
-const winston = require('winston')
+const logger = require('winston')
 
 module.exports = function () {
   return function copyOrigin (req, res, next) {
-    winston.info('copyOrigin middleware is running')
+    logger.info('copyOrigin middleware is running')
 
     req.feathers.origin = req.headers.origin
 
