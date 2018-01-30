@@ -1,12 +1,13 @@
 const createService = require('feathers-sequelize')
 const multer = require('multer')
 const path = require('path')
+const settings = require('standard-settings')
 
 const createModel = require('../../models/request.model')
 const hooks = require('./request.hooks')
 
 const upload = multer({
-  dest: path.join(__dirname, '..', '..', '..', 'uploads')
+  dest: path.normalize(path.join(__dirname, settings.get('folder:uploads')))
 })
 
 module.exports = function (app) {

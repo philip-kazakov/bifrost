@@ -4,12 +4,11 @@
     "port": 3000
   },
   "flag": {
-    "devMode": true,
-    "dropTables": false,
-    "autostart": true
+    "devMode": true
   },
   "folder": {
     "uploads": "./../../../uploads"
   },
-  "timeout": "30s"
+  "timeout": "30s",
+  "sqlite": "sqlite://bifrost.sqlite"
 }

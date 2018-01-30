@@ -1,4 +1,5 @@
 const NanoTimer = require('nanotimer')
+const settings = require('standard-settings')
 
 class Service {
   constructor () {
@@ -9,7 +10,7 @@ class Service {
     await this.remove()
 
     if (Object.prototype.toString.call(handle) === '[object Function]') {
-      this.timer.setTimeout(handle, [this.timer], 5000)
+      this.timer.setTimeout(handle, [this.timer], settings.get('timeout'))
     }
 
     return 'OK'

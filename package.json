@@ -22,7 +22,7 @@
     "yarn": ">= 0.18.0"
   },
   "scripts": {
-    "start": "node src/"
+    "start": "node src/ --settings settings/settings.default.json"
   },
   "dependencies": {
     "@feathersjs/errors": "^3.2.1",

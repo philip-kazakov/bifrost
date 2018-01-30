@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize')
+const settings = require('standard-settings')
 
 module.exports = function (app) {
-  const connectionString = app.get('sqlite')
+  const connectionString = settings.get('sqlite')
   const sequelize = new Sequelize(connectionString, {
     dialect: 'sqlite',
     logging: false,
