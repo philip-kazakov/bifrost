@@ -42,6 +42,7 @@
     "sequelize": "^4.31.2",
     "serve-favicon": "^2.4.5",
     "sqlite3": "^3.1.13",
+    "standard-settings": "^1.1.11",
     "winston": "^2.4.0"
   }
 }
