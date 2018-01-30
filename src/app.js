@@ -6,7 +6,6 @@ const helmet = require('helmet')
 const logger = require('winston')
 
 const feathers = require('@feathersjs/feathers')
-const configuration = require('@feathersjs/configuration')
 const express = require('@feathersjs/express')
 const socketio = require('@feathersjs/socketio')
 
@@ -19,8 +18,6 @@ const sequelize = require('./sequelize')
 
 const app = express(feathers())
 
-// Load app configuration
-app.configure(configuration())
 // Enable CORS, security, compression, favicon and body parsing
 app.use(cors())
 app.use(helmet())

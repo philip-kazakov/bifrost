@@ -25,7 +25,6 @@
     "start": "node src/"
   },
   "dependencies": {
-    "@feathersjs/configuration": "^1.0.2",
     "@feathersjs/errors": "^3.2.1",
     "@feathersjs/express": "^1.1.2",
     "@feathersjs/feathers": "^3.0.5",
