@@ -40,7 +40,10 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         body: form
       })
 
-      context.result = await res.json()
+      context.result = {
+        isHook: true,
+        data: await res.json()
+      }
     } catch (err) {
       logger.info(err)
     }

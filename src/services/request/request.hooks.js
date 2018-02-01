@@ -1,5 +1,6 @@
 const setTimestamp = require('../../hooks/set-timestamp')
 const checkRequest = require('../../hooks/check-request')
+const formatResponse = require('../../hooks/format-response')
 
 module.exports = {
   before: {
@@ -18,7 +19,9 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [
+      formatResponse()
+    ],
     update: [],
     patch: [],
     remove: []
