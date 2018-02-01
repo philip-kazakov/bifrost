@@ -8,9 +8,6 @@ const fs = require('fs')
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return async context => {
-    console.dir(context)
-    console.dir(context.params.files)
-
     const form = new FormData()
 
     if (!context.data.formData) {

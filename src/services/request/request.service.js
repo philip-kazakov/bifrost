@@ -12,12 +12,10 @@ const upload = multer({
 
 module.exports = function (app) {
   const Model = createModel(app)
-  const paginate = app.get('paginate')
 
   const options = {
     name: 'request',
-    Model,
-    paginate
+    Model
   }
 
   // Initialize our service with any options it requires

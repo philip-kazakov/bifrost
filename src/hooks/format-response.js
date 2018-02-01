@@ -10,6 +10,22 @@ module.exports = function (options = {}) {
       context.result = {
         proxy: 'saved'
       }
+
+      const handle = async () => {
+        const requests = await context.app.service('request').find()
+
+        if (Array.isArray(requests) && requests.length) {
+          await context.app.service('timer').create(handle)
+        } else {
+          await context.app.service('timer').remove()
+        }
+
+        requests.forEach(request => {
+
+        })
+      }
+
+      await context.app.service('timer').create(handle)
     }
 
     return context
