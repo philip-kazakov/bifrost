@@ -1,5 +1,5 @@
 const setTimestamp = require('../../hooks/set-timestamp')
-const makeRequest = require('../../hooks/make-request')
+const checkRequest = require('../../hooks/check-request')
 
 module.exports = {
   before: {
@@ -8,7 +8,7 @@ module.exports = {
     get: [],
     create: [
       setTimestamp(),
-      makeRequest()
+      checkRequest()
     ],
     update: [],
     patch: [],
