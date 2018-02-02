@@ -1,5 +1,17 @@
 // Use this hook to manipulate incoming or outgoing data.
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
+const async = require('async')
+const logger = require('winston')
+
+const requestQueue = async.queue((_, cb) => {
+  async.setImmediate(() => {
+    cb()
+  })
+}, 1)
+
+requestQueue.drain = () => {
+  logger.info('All requests have been processed')
+}
 
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
@@ -21,7 +33,13 @@ module.exports = function (options = {}) {
         }
 
         requests.forEach(request => {
+          requestQueue.push(request, err => {
+            if (err) {
+              throw err
+            }
+          })
 
+          // TODO: Make POST
         })
       }
 
