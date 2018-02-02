@@ -21,7 +21,7 @@ module.exports = function (app) {
   // Initialize our service with any options it requires
   app.use('/request', upload.any(), (req, res, next) => {
     if (Array.isArray(req.files) && req.files.length) {
-      req.feathers.files = req.files.map(file => ({
+      req.body.files = req.files.map(file => ({
         path: file.path,
         fieldname: file.fieldname,
         originalname: file.originalname

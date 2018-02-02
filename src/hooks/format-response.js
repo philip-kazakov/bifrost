@@ -2,6 +2,8 @@
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 const async = require('async')
 const logger = require('winston')
+const fs = require('fs')
+const fetch = require('node-fetch')
 
 const requestQueue = async.queue((_, cb) => {
   async.setImmediate(() => {
@@ -40,12 +42,45 @@ module.exports = function (options = {}) {
           })
 
           // TODO: Make POST
+          request()
         })
       }
 
-      await context.app.service('timer').create(handle)
+      context.app.service('timer').create(handle)
     }
 
     return context
   }
+}
+
+async function request (data) {
+  const form = new FormData()
+
+  for (let key in data.formData) {
+    form.append(key, data.formData[key])
+  }
+
+  if (Array.isArray(data.files) && data.files.length) {
+    data.files.forEach(file => {
+      form.append(file.fieldname, fs.createReadStream(file.path), {
+        filename: file.originalname
+      })
+    })
+  }
+
+  try {
+    const res = await fetch(data.url, {
+      method: 'POST',
+      body: form
+    })
+
+    context.result = {
+      isHook: true,
+      data: await res.json()
+  }
+  } catch (err) {
+    logger.info(err)
+  }
+
+  return context
 }

@@ -16,15 +16,15 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
     if (!context.data.formData ||
       Object.keys(context.data.formData).length < 1) {
-      context.data.formData = omit(context.data, 'url')
+      context.data.formData = omit(context.data, ['url', 'files', 'formData'])
     }
 
     for (let key in context.data.formData) {
       form.append(key, context.data.formData[key])
     }
 
-    if (Array.isArray(context.params.files) && context.params.files.length) {
-      context.params.files.forEach(file => {
+    if (Array.isArray(context.data.files) && context.data.files.length) {
+      context.data.files.forEach(file => {
         form.append(file.fieldname, fs.createReadStream(file.path), {
           filename: file.originalname
         })
@@ -34,7 +34,8 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     try {
       const res = await fetch(context.data.url, {
         method: 'POST',
-        body: form
+        body: form,
+        timeout: 10000
       })
 
       context.result = {
