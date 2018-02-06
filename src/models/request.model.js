@@ -10,7 +10,9 @@ module.exports = function (app) {
       type: DataTypes.DATE,
       allowNull: false
     },
-    body: DataTypes.JSON
+    url: DataTypes.STRING,
+    files: DataTypes.JSON,
+    formData: DataTypes.JSON
   }, {
     hooks: {
       beforeCount (options) {
