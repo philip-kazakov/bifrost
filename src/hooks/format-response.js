@@ -4,16 +4,7 @@ const async = require('async')
 const logger = require('winston')
 const fs = require('fs')
 const fetch = require('node-fetch')
-
-const requestQueue = async.queue((_, cb) => {
-  async.setImmediate(() => {
-    cb()
-  })
-}, 1)
-
-requestQueue.drain = () => {
-  logger.info('All requests have been processed')
-}
+const FormData = require('form-data')
 
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
@@ -25,35 +16,56 @@ module.exports = function (options = {}) {
         proxy: 'saved'
       }
 
-      const handle = async () => {
+      const handler = async () => {
         const requests = await context.app.service('request').find()
+        const requestQueue = async.queue((request, cb) => {
+          makeRequest(request)
+            .then(res => {
+              if (res) {
+                if (res.status >= 200 && res.status < 300) {
+                  context.app.service('request').remove(request.id)
+                } else {
+                  cb(res.statusText)
+                }
+              } else {
+                cb('No response')
+              }
+            })
+            .catch(err => {
+              cb(err)
+            })
+        }, 3)
+
+        requestQueue.drain = () => {
+          logger.info('All requests have been processed')
+        }
 
         if (Array.isArray(requests) && requests.length) {
-          await context.app.service('timer').create(handle)
+          context.app.service('timer').create({ handler })
         } else {
-          await context.app.service('timer').remove()
+          context.app.service('timer').remove(0)
         }
 
         requests.forEach(request => {
+          request.files = JSON.parse(request.files)
+          request.formData = JSON.parse(request.formData)
+
           requestQueue.push(request, err => {
             if (err) {
-              throw err
+              logger.error(err)
             }
           })
-
-          // TODO: Make POST
-          request()
         })
       }
 
-      context.app.service('timer').create(handle)
+      context.app.service('timer').create({ handler })
     }
 
     return context
   }
 }
 
-async function request (data) {
+function makeRequest (data) {
   const form = new FormData()
 
   for (let key in data.formData) {
@@ -68,19 +80,9 @@ async function request (data) {
     })
   }
 
-  try {
-    const res = await fetch(data.url, {
-      method: 'POST',
-      body: form
-    })
-
-    context.result = {
-      isHook: true,
-      data: await res.json()
-  }
-  } catch (err) {
-    logger.info(err)
-  }
-
-  return context
+  return fetch(data.url, {
+    method: 'POST',
+    body: form,
+    timeout: 10000
+  })
 }

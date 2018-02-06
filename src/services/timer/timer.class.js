@@ -6,11 +6,11 @@ class Service {
     this.timer = new NanoTimer()
   }
 
-  async create (handle) {
-    await this.remove()
+  async create ({ handler }) {
+    await this.remove(0)
 
-    if (Object.prototype.toString.call(handle) === '[object Function]') {
-      this.timer.setTimeout(handle, [this.timer], settings.get('timeout'))
+    if (handler) {
+      this.timer.setTimeout(handler, [this.timer], settings.get('timeout'))
     }
 
     return 'OK'

@@ -2,6 +2,7 @@
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 const fetch = require('node-fetch')
 const omit = require('lodash.omit')
+const isFunction = require('lodash.isfunction')
 const logger = require('winston')
 const FormData = require('form-data')
 const fs = require('fs')
@@ -40,7 +41,11 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
       context.result = {
         isHook: true,
-        data: await res.json()
+        data: res.status
+      }
+
+      if (isFunction(res.json)) {
+        context.result = await res.json()
       }
     } catch (err) {
       logger.info(err)
