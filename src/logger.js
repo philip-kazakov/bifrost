@@ -1,7 +1,7 @@
 const winston = require('winston')
 
 module.exports = winston.createLogger({
-  level: 'info',
+  level: 'debug',
   format: winston.format.json(),
   transports: [
     new winston.transports.File({
