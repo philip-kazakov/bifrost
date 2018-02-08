@@ -10,9 +10,26 @@ module.exports = function (app) {
       type: DataTypes.DATE,
       allowNull: false
     },
-    url: DataTypes.STRING,
-    files: DataTypes.JSON,
-    formData: DataTypes.JSON
+    url: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    files: {
+      type: DataTypes.JSON,
+      defaultValue: []
+    },
+    formData: {
+      type: DataTypes.JSON,
+      defaultValue: {}
+    },
+    retriesCount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    status: {
+      type: DataTypes.ENUM(['pending', 'done']),
+      defaultValue: 'pending'
+    }
   }, {
     hooks: {
       beforeCount (options) {
