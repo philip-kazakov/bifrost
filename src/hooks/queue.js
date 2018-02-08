@@ -18,25 +18,27 @@ module.exports = function (options = {}) {
 
       const handler = async () => {
         const requests = await context.app.service('request').find()
-        const requestQueue = async.queue((request, cb) => {
+        const requestQueue = async.queue(async (request, cb) => {
           try {
-            makeRequest(request)
-              .then(res => {
-                if (res) {
-                  if (res.status >= 200 && res.status < 300) {
-                    context.app.service('request').remove(request.id)
-                  } else {
-                    cb(res.statusText)
-                  }
-                } else {
-                  cb(new Error('No response'))
-                }
+            const res = await makeRequest(request)
+
+            if (res && (res.status >= 200 && res.status < 300)) {
+              await context.app.service('request').update(request.id, {
+                status: 'done'
               })
-              .catch(err => {
-                cb(err)
-              })
+
+              cb()
+            } else {
+              throw new Error('No response')
+            }
           } catch (err) {
             logger.error(err)
+
+            context.app.service('request').patch(request.id, {
+              retriesCount: request.retriesCount + 1
+            })
+
+            cb(err)
           }
         }, 3)
 
