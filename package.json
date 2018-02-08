@@ -1,21 +1,22 @@
 {
   "name": "bifrost",
-  "description": "",
-  "version": "0.0.0",
+  "description": "A cache gateway for posting in the past",
+  "version": "0.0.1",
+  "license": "MIT",
   "homepage": "",
   "main": "src",
   "keywords": [
-    "feathers"
+    "feathers",
+    "cache",
+    "gatewat",
+    "proxy",
+    "queue"
   ],
-  "author": {
-    "name": "NikitaNO",
-    "email": "nikita.nagatkin@gmail.com"
-  },
+  "author": "Soixante circuits",
   "contributors": [],
   "bugs": {},
   "directories": {
-    "lib": "src",
-    "test": "test/"
+    "lib": "src"
   },
   "engines": {
     "node": "^8.0.0",
@@ -44,6 +45,6 @@
     "serve-favicon": "^2.4.5",
     "sqlite3": "^3.1.13",
     "standard-settings": "^1.1.11",
-    "winston": "^2.4.0"
+    "winston": "^3.0.0-rc1"
   }
 }
