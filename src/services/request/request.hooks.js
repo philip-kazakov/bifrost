@@ -1,6 +1,6 @@
 const setTimestamp = require('../../hooks/set-timestamp')
 const checkRequest = require('../../hooks/check-request')
-const formatResponse = require('../../hooks/format-response')
+const queue = require('../../hooks/queue')
 
 module.exports = {
   before: {
@@ -20,7 +20,7 @@ module.exports = {
     find: [],
     get: [],
     create: [
-      formatResponse()
+      queue()
     ],
     update: [],
     patch: [],
