@@ -29,7 +29,7 @@ module.exports = function (options = {}) {
                     cb(res.statusText)
                   }
                 } else {
-                  cb('No response')
+                  cb(new Error('No response'))
                 }
               })
               .catch(err => {
