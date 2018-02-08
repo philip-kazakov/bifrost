@@ -3,7 +3,7 @@
 const fetch = require('node-fetch')
 const omit = require('lodash.omit')
 const isFunction = require('lodash.isfunction')
-const logger = require('winston')
+const logger = require('./../logger')
 const FormData = require('form-data')
 const fs = require('fs')
 
@@ -48,7 +48,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         context.result = await res.json()
       }
     } catch (err) {
-      logger.info(err)
+      logger.error(err)
     }
 
     return context

@@ -1,7 +1,7 @@
 // Use this hook to manipulate incoming or outgoing data.
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 const async = require('async')
-const logger = require('winston')
+const logger = require('./../logger')
 const fs = require('fs')
 const fetch = require('node-fetch')
 const FormData = require('form-data')
@@ -19,25 +19,30 @@ module.exports = function (options = {}) {
       const handler = async () => {
         const requests = await context.app.service('request').find()
         const requestQueue = async.queue((request, cb) => {
-          makeRequest(request)
-            .then(res => {
-              if (res) {
-                if (res.status >= 200 && res.status < 300) {
-                  context.app.service('request').remove(request.id)
+          try {
+            makeRequest(request)
+              .then(res => {
+                if (res) {
+                  if (res.status >= 200 && res.status < 300) {
+                    context.app.service('request').remove(request.id)
+                  } else {
+                    cb(res.statusText)
+                  }
                 } else {
-                  cb(res.statusText)
+                  cb('No response')
                 }
-              } else {
-                cb('No response')
-              }
-            })
-            .catch(err => {
-              cb(err)
-            })
+              })
+              .catch(err => {
+                cb(err)
+              })
+          } catch (err) {
+            logger.error(err)
+          }
         }, 3)
 
         requestQueue.drain = () => {
           logger.info('All requests have been processed')
+          console.log('All requests have been processed')
         }
 
         if (Array.isArray(requests) && requests.length) {

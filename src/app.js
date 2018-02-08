@@ -3,7 +3,7 @@
 const compress = require('compression')
 const cors = require('cors')
 const helmet = require('helmet')
-const logger = require('winston')
+const logger = require('./logger')
 
 const feathers = require('@feathersjs/feathers')
 const express = require('@feathersjs/express')
