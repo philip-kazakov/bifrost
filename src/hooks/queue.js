@@ -47,7 +47,7 @@ module.exports = function (options = {}) {
 
             cb(err)
           }
-        }, 3)
+        }, maxQueue)
 
         requestQueue.drain = () => {
           logger.info('All requests have been processed')
