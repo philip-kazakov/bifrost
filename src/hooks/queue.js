@@ -17,13 +17,17 @@ module.exports = function (options = {}) {
       }
 
       const handler = async () => {
-        const requests = await context.app.service('request').find()
+        const requests = await context.app.service('request').find({
+          query: {
+            status: 'pending'
+          }
+        })
         const requestQueue = async.queue(async (request, cb) => {
           try {
             const res = await makeRequest(request)
 
             if (res && (res.status >= 200 && res.status < 300)) {
-              await context.app.service('request').update(request.id, {
+              await context.app.service('request').patch(request.id, {
                 status: 'done'
               })
 
