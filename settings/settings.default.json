@@ -10,5 +10,6 @@
     "uploads": "./../../../uploads"
   },
   "timeout": "30s",
+  "maxQueue": 5,
   "sqlite": "sqlite://bifrost.sqlite"
 }

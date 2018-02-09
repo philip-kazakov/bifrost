@@ -4,7 +4,10 @@ const async = require('async')
 const logger = require('./../logger')
 const fs = require('fs')
 const fetch = require('node-fetch')
+const settings = require('standard-settings')
 const FormData = require('form-data')
+
+const maxQueue = settings.get('maxQueue') || 5
 
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
